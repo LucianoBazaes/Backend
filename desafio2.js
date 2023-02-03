@@ -63,21 +63,24 @@ class ProductManager {
   }
 
   //Metodo para eliminar un producto mediante su id
-  async deleteProduct(id) {
-    const productos = await this.getProduct();
-
-    let filterProdId = productos.filter((p) => p.id != id);
-
-    console.log("Delete Product");
-
-    await fs.writeFile(this.path, JSON.stringify(filterProdId), "utf-8");
-  }
+   async deleteProduct(id) {
+     const productos = await this.getProduct();
+     if(productos.some(p => p.id == id)) {
+       let filterProdId = productos.filter((p) => p.id != id);
+       console.log("Delete Product");
+       await fs.writeFile(this.path, JSON.stringify(filterProdId), "utf-8");
+      } else {
+        console.log('Error: Product Not Found');
+      }
+   }
 
   async updateProduct(id, atributos) {
     const productos = await this.getProduct();
     const prodAModif = productos.find((p) => p.id === id);
     const updatedProduct = { ...prodAModif, ...atributos };
-    const updatedProducts = productos.map((p) => (p.id) !== id ? p : updatedProduct);
+    const updatedProducts = productos.map((p) =>
+      p.id !== id ? p : updatedProduct
+    );
     await fs.writeFile(this.path, JSON.stringify(updatedProducts), "utf-8");
 
     // await this.deleteProduct(id);
@@ -137,9 +140,11 @@ await productos.addProduct(
 // console.log(productoId);
 
 //Metodo para borrar un producto mediante su id
-//productos.deleteProduct(1)
+const productDelete = await productos.deleteProduct(5);
+console.log(productDelete);
+
 
 //Metodo para modificar un producto
-let prodMod = await productos.updateProduct(2,{ stock: 15 });
+// let prodMod = await productos.updateProduct(2, { stock: 15 });
 
-console.log(prodMod);
+// console.log(prodMod);
