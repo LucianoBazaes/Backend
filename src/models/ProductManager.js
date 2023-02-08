@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 
 //Clase Product Manager
-class ProductManager {
+ class ProductManager {
   constructor() {
     this.path = "./productos.txt";
     this.products = [];
@@ -65,7 +65,8 @@ class ProductManager {
   //Metodo para eliminar un producto mediante su id
    async deleteProduct(id) {
      const productos = await this.getProduct();
-     if(productos.some(p => p.id == id)) {
+     const findProd = productos.some((prod) => prod.id == id)
+     if(findProd) {
        let filterProdId = productos.filter((p) => p.id != id);
        console.log("Delete Product");
        await fs.writeFile(this.path, JSON.stringify(filterProdId), "utf-8");
@@ -76,22 +77,18 @@ class ProductManager {
 
   async updateProduct(id, atributos) {
     const productos = await this.getProduct();
-    const prodAModif = productos.find((p) => p.id === id);
-    const updatedProduct = { ...prodAModif, ...atributos };
+    const prodModif = productos.find((p) => p.id === id);
+    const updatedProduct = { ...prodModif, ...atributos };
     const updatedProducts = productos.map((p) =>
       p.id !== id ? p : updatedProduct
     );
     await fs.writeFile(this.path, JSON.stringify(updatedProducts), "utf-8");
-
-    // await this.deleteProduct(id);
-    // const productos = await this.getProduct();
-    // const productosModificados =[{...producto, id}, ...productos];
-    // await fs.writeFile(this.path, JSON.stringify(productosModificados), "utf-8");
   }
 }
 
-//Instancio la clase ProductManager
-const productos = new ProductManager();
+
+// //Instancio la clase ProductManager
+// const productos = new ProductManager();
 
 //Creo mi primer producto
 await productos.addProduct(
@@ -140,11 +137,13 @@ await productos.addProduct(
 // console.log(productoId);
 
 //Metodo para borrar un producto mediante su id
-const productDelete = await productos.deleteProduct(5);
-console.log(productDelete);
+// const productDelete = await productos.deleteProduct(5);
+// console.log(productDelete);
 
 
 //Metodo para modificar un producto
 // let prodMod = await productos.updateProduct(2, { stock: 15 });
 
 // console.log(prodMod);
+
+export default ProductManager
