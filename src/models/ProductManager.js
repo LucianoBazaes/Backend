@@ -3,7 +3,7 @@ import { promises as fs } from "fs";
 //Clase Product Manager
  class ProductManager {
   constructor() {
-    this.path = "./productos.txt";
+    this.path = "./products.txt";
     this.products = [];
   }
   //ID autoincrementable
@@ -46,6 +46,7 @@ import { promises as fs } from "fs";
   async getProduct() {
     let read = await fs.readFile(this.path, "utf-8");
     return JSON.parse(read);
+    console.log(this.getProduct)
   }
 
   //Método para buscar si un producto existente o no dentro de mi array mediante su ID
@@ -79,9 +80,7 @@ import { promises as fs } from "fs";
     const productos = await this.getProduct();
     const prodModif = productos.find((p) => p.id === id);
     const updatedProduct = { ...prodModif, ...atributos };
-    const updatedProducts = productos.map((p) =>
-      p.id !== id ? p : updatedProduct
-    );
+    const updatedProducts = productos.map((p) => p.id !== id ? p : updatedProduct);
     await fs.writeFile(this.path, JSON.stringify(updatedProducts), "utf-8");
   }
 }
@@ -91,7 +90,7 @@ import { promises as fs } from "fs";
 // const productos = new ProductManager();
 
 //Creo mi primer producto
-await productos.addProduct(
+await products.addProduct(
   "Remera Nike",
   "Remera Nike de color verde",
   2000,
@@ -101,7 +100,7 @@ await productos.addProduct(
 );
 
 //Creo mi segundo producto
-await productos.addProduct(
+await products.addProduct(
   "Buzo Nike",
   "Buzo Nike de color negro deportivo",
   14000,
@@ -111,7 +110,7 @@ await productos.addProduct(
 );
 
 //Creo mi tercer producto
-await productos.addProduct(
+await products.addProduct(
   "Medias Nike",
   "Medias Nike negras cortas deportivas",
   3000,
@@ -121,7 +120,7 @@ await productos.addProduct(
 );
 
 //Creo mi cuarto producto
-await productos.addProduct(
+await products.addProduct(
   "Pantalón Nike",
   "Pantalón Nike Gris Air",
   26000,
@@ -133,16 +132,16 @@ await productos.addProduct(
 //Testing
 
 //Metodo para obtener un producto mediante su id
-// const productoId = await productos.getProductById(2);
-// console.log(productoId);
+//  const productoId = await products.getProductById(2);
+//  console.log(productoId);
 
 //Metodo para borrar un producto mediante su id
-// const productDelete = await productos.deleteProduct(5);
+// const productDelete = await products.deleteProduct(5);
 // console.log(productDelete);
 
 
 //Metodo para modificar un producto
-// let prodMod = await productos.updateProduct(2, { stock: 15 });
+// let prodMod = await products.updateProduct(2, { stock: 15 });
 
 // console.log(prodMod);
 
