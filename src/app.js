@@ -5,16 +5,47 @@ const app = express();
 
 const products = new ProductManager();
 
-// const allProducts = await products.getProduct();
+const allProducts = await products.getProduct();
 
-const PORT = 8080; 
-
-// app.get('/products', async (req, res) => {
-// console.log(await allProducts)
-// })
+const PORT = 8080;
 
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.json());
+
+
+// app.get("/products", (req, res) => {
+//   res.log('Servidor con Express')});
+
+
+  app.get('/products', async (req, res) => {
+
+   let limit = parseInt(req.query.limit);
+
+   let productList = await products.getProduct();
+
+   let productLimit;
+
+   if(!limit) {
+      return res.send(await allProducts)
+   } else {
+       productList = await products.getProduct();
+       productLimit = productList.slice(0, limit);
+   }
+   res.send(productLimit);
+
+  })
+
+   app.get('/products/:id', async (req,res) => {
+      const product = await products.getProductById(parseInt(req.params.id));
+
+      if(product == null) {
+         res.send("Product Not Found")
+      } else {
+         res.send(product) 
+      }   
+  })
+  
 
 
 
@@ -26,7 +57,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
- app.listen(PORT, () => {
-    console.log(`Servidor corriendo en puerto ${PORT}`);
- }
- )
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en puerto ${PORT}`);
+});
