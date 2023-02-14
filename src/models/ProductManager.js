@@ -3,7 +3,7 @@ import { promises as fs } from "fs";
 //Clase Product Manager
  class ProductManager {
   constructor() {
-    this.path = "./products.txt";
+    this.path = "./src/models/products.txt";
     this.products = [];
   }
   //ID autoincrementable
@@ -87,47 +87,47 @@ import { promises as fs } from "fs";
 
 
 // //Instancio la clase ProductManager
-// const productos = new ProductManager();
+ const products = new ProductManager();
 
-//Creo mi primer producto
-await products.addProduct(
-  "Remera Nike",
-  "Remera Nike de color verde",
-  2000,
-  "image1",
-  "ABC123",
-  10
-);
+// //Creo mi primer producto
+// await products.addProduct(
+//   "Remera Nike",
+//   "Remera Nike de color verde",
+//   2000,
+//   "image1",
+//   "ABC123",
+//   10
+// );
 
-//Creo mi segundo producto
-await products.addProduct(
-  "Buzo Nike",
-  "Buzo Nike de color negro deportivo",
-  14000,
-  "image2",
-  "ABC234",
-  6
-);
+// //Creo mi segundo producto
+// await products.addProduct(
+//   "Buzo Nike",
+//   "Buzo Nike de color negro deportivo",
+//   14000,
+//   "image2",
+//   "ABC234",
+//   6
+// );
 
-//Creo mi tercer producto
-await products.addProduct(
-  "Medias Nike",
-  "Medias Nike negras cortas deportivas",
-  3000,
-  "image3",
-  "ABC345",
-  8
-);
+// //Creo mi tercer producto
+// await products.addProduct(
+//   "Medias Nike",
+//   "Medias Nike negras cortas deportivas",
+//   3000,
+//   "image3",
+//   "ABC345",
+//   8
+// );
 
-//Creo mi cuarto producto
-await products.addProduct(
-  "Pantalón Nike",
-  "Pantalón Nike Gris Air",
-  26000,
-  "image4",
-  "ABC456",
-  4
-);
+// //Creo mi cuarto producto
+// await products.addProduct(
+//   "Pantalón Nike",
+//   "Pantalón Nike Gris Air",
+//   26000,
+//   "image4",
+//   "ABC456",
+//   4
+// );
 
 //Testing
 

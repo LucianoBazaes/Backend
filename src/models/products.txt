@@ -1,3 +1,1 @@
-[
-    
-]
+[{"title":"Remera Nike","description":"Remera Nike de color verde","price":2000,"thumbnail":"image1","code":"ABC123","stock":10,"id":1},{"title":"Buzo Nike","description":"Buzo Nike de color negro deportivo","price":14000,"thumbnail":"image2","code":"ABC234","stock":6,"id":2},{"title":"Medias Nike","description":"Medias Nike negras cortas deportivas","price":3000,"thumbnail":"image3","code":"ABC345","stock":8,"id":3},{"title":"Pantalón Nike","description":"Pantalón Nike Gris Air","price":26000,"thumbnail":"image4","code":"ABC456","stock":4,"id":4}]

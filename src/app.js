@@ -18,6 +18,7 @@ app.use(express.json());
 //   res.log('Servidor con Express')});
 
 
+//Obtener todos los productos
   app.get('/products', async (req, res) => {
 
    let limit = parseInt(req.query.limit);
@@ -36,8 +37,10 @@ app.use(express.json());
 
   })
 
+
+//Obtener prodcutos mediante su ID
    app.get('/products/:id', async (req,res) => {
-      const product = await products.getProductById(parseInt(req.params.id));
+      let product = await products.getProductById(parseInt(req.params.id));
 
       if(product == null) {
          res.send("Product Not Found")
@@ -46,16 +49,6 @@ app.use(express.json());
       }   
   })
   
-
-
-
-
-
-
-
-
-
-
 
 
 app.listen(PORT, () => {
